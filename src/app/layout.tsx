@@ -1,5 +1,6 @@
+import { Theme } from "@radix-ui/themes";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import { ToastProvider } from "@/components/toast/toast-provider";
 import { TRPCReactProvider } from "@/trpc/client";
 import "./globals.css";
@@ -9,14 +10,9 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Tasks",
-  description: "Simple task manager built with Next.js and tRPC",
+  title: "Tarefas",
+  description: "Gerenciador de tarefas simples com Next.js e tRPC",
 };
 
 export default function RootLayout({
@@ -25,13 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <TRPCReactProvider>
-          <ToastProvider>{children}</ToastProvider>
-        </TRPCReactProvider>
+    <html lang="pt-BR">
+      <body className={`${geistSans.variable} antialiased`}>
+        <Theme appearance="light">
+          <TRPCReactProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </TRPCReactProvider>
+        </Theme>
       </body>
     </html>
   );

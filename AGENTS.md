@@ -52,7 +52,7 @@ Keep TanStack Query usage minimal and easy to read:
 
 - ESLint and Prettier are the source of truth. Never disable a rule to make code pass.
 - Run `lint` and `build` before every commit.
-- Unit tests with Vitest only for the repository and the router. No e2e tests.
+- Unit tests with Vitest only for the repository, the router and `TaskForm` (Testing Library with jsdom). No e2e tests.
 
 ## Commits
 
