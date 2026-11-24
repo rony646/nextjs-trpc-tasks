@@ -1,7 +1,8 @@
 "use client";
 
-import { Text } from "@radix-ui/themes";
+import { Button, Flex, Text } from "@radix-ui/themes";
 
+import { TaskFormDialog } from "@/components/task-form-dialog";
 import { TaskItem } from "@/components/task-item";
 import { useTaskList } from "@/trpc/tasks";
 
@@ -10,9 +11,14 @@ export function TaskList() {
 
   if (data.items.length === 0) {
     return (
-      <Text as="p" color="gray">
-        Nenhuma tarefa ainda
-      </Text>
+      <Flex direction="column" align="center" gap="3" py="9">
+        <Text as="p" color="gray">
+          Nenhuma tarefa ainda
+        </Text>
+        <TaskFormDialog
+          trigger={<Button variant="soft">Criar primeira tarefa</Button>}
+        />
+      </Flex>
     );
   }
 
