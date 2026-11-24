@@ -107,10 +107,27 @@ describe("TaskForm", () => {
       defaultValues: { titulo: "Ler" },
     });
 
-    expect(submitButton.textContent).toBe("Salvando...");
+    expect(screen.getByRole("button", { name: "Salvando..." })).toBe(
+      submitButton,
+    );
+    expect(submitButton.matches(":disabled")).toBe(true);
     expect(submitButton.closest("fieldset")).toHaveProperty("disabled", true);
     expect(titulo.matches(":disabled")).toBe(true);
     expect(descricao.matches(":disabled")).toBe(true);
+  });
+
+  it("shows a server error under the matching field", async () => {
+    const serverMessage = "Esse título já existe";
+    const onSubmit = vi.fn<Parameters<typeof TaskForm>[0]["onSubmit"]>(
+      (_values, setFieldError) => setFieldError("titulo", serverMessage),
+    );
+    const { user, titulo, submitButton } = renderForm({ onSubmit });
+
+    await user.type(titulo, "Ler");
+    await user.click(submitButton);
+
+    expect(await screen.findByText(serverMessage)).toBeTruthy();
+    expect(titulo.getAttribute("aria-invalid")).toBe("true");
   });
 
   it("focuses the field when its label is clicked", async () => {

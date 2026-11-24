@@ -15,9 +15,14 @@ import {
 
 type TaskFormValues = z.input<typeof createTaskInput>;
 
+export type SetFieldError = (
+  field: keyof TaskFormValues,
+  message: string,
+) => void;
+
 type TaskFormProps = {
   defaultValues?: TaskFormValues;
-  onSubmit: (values: CreateTaskInput) => void;
+  onSubmit: (values: CreateTaskInput, setFieldError: SetFieldError) => void;
   isSubmitting: boolean;
 };
 
@@ -36,6 +41,7 @@ export function TaskForm({
     register,
     handleSubmit,
     control,
+    setError,
     formState: { errors },
   } = useForm<TaskFormValues, unknown, CreateTaskInput>({
     resolver: zodResolver(createTaskInput),
@@ -45,8 +51,14 @@ export function TaskForm({
   const titulo = useWatch({ control, name: "titulo" });
   const isTituloEmpty = !titulo.trim();
 
+  const setFieldError: SetFieldError = (field, message) =>
+    setError(field, { message });
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form
+      onSubmit={handleSubmit((values) => onSubmit(values, setFieldError))}
+      noValidate
+    >
       <fieldset disabled={isSubmitting} className="flex flex-col gap-4">
         <Flex direction="column" gap="1">
           <Label.Root htmlFor={tituloId} className={LABEL_CLASS_NAME}>
@@ -88,7 +100,12 @@ export function TaskForm({
         </Flex>
 
         <Flex justify="end">
-          <Button type="submit" size="3" disabled={isTituloEmpty}>
+          <Button
+            type="submit"
+            size="3"
+            disabled={isTituloEmpty}
+            loading={isSubmitting}
+          >
             {isSubmitting ? "Salvando..." : "Salvar"}
           </Button>
         </Flex>

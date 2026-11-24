@@ -6,10 +6,9 @@ import { useState } from "react";
 
 import { useToast } from "@/components/toast/use-toast";
 import type { Task } from "@/server/tasks/task.schema";
-import { useDeleteTask } from "@/trpc/tasks";
+import { isNotFoundError, useDeleteTask } from "@/trpc/tasks";
 
 const DELETED_MESSAGE = "Tarefa excluída";
-const NOT_FOUND_MESSAGE = "Tarefa não encontrada";
 const DELETE_ERROR_MESSAGE = "Não foi possível excluir a tarefa";
 const DIALOG_MAX_WIDTH = "420px";
 
@@ -33,9 +32,7 @@ export function DeleteTaskDialog({ task }: DeleteTaskDialogProps) {
         onSuccess: () => toast.success(DELETED_MESSAGE),
         onError: (error) =>
           toast.error(
-            error.data?.code === "NOT_FOUND"
-              ? NOT_FOUND_MESSAGE
-              : DELETE_ERROR_MESSAGE,
+            isNotFoundError(error) ? error.message : DELETE_ERROR_MESSAGE,
           ),
         onSettled: () => setOpen(false),
       },
