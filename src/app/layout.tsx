@@ -23,11 +23,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${geistSans.variable} antialiased`}>
-        <Theme appearance="light">
-          <TRPCReactProvider>
-            <ToastProvider>{children}</ToastProvider>
-          </TRPCReactProvider>
-        </Theme>
+        {/* Outside Theme: its root is a stacking context, so toasts inside it would render under open dialogs. */}
+        <ToastProvider>
+          <Theme appearance="light">
+            <TRPCReactProvider>{children}</TRPCReactProvider>
+          </Theme>
+        </ToastProvider>
       </body>
     </html>
   );
