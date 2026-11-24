@@ -5,9 +5,11 @@ import { TaskList } from "@/components/task-list";
 import { getQueryClient, HydrateClient, trpc } from "@/trpc/server";
 import { taskListOptions } from "@/trpc/tasks";
 
+// The tasks change at runtime, so the page must render on every request, never at build time.
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
+  // HydrateClient hands this prefetched page to the client, so the list renders filled without a client fetch.
   await getQueryClient().infiniteQuery(taskListOptions(trpc));
 
   return (
