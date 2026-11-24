@@ -1,6 +1,7 @@
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import { Card, Flex, Heading, IconButton, Text } from "@radix-ui/themes";
 
+import { DeleteTaskDialog } from "@/components/delete-task-dialog";
 import { TaskFormDialog } from "@/components/task-form-dialog";
 import type { Task } from "@/server/tasks/task.schema";
 
@@ -25,18 +26,21 @@ export function TaskItem({ task }: TaskItemProps) {
           <Heading as="h2" size="3">
             {task.titulo}
           </Heading>
-          <TaskFormDialog
-            task={task}
-            trigger={
-              <IconButton
-                size="1"
-                variant="soft"
-                aria-label={`Editar tarefa ${task.titulo}`}
-              >
-                <Pencil1Icon />
-              </IconButton>
-            }
-          />
+          <Flex gap="2" flexShrink="0">
+            <TaskFormDialog
+              task={task}
+              trigger={
+                <IconButton
+                  size="1"
+                  variant="soft"
+                  aria-label={`Editar tarefa ${task.titulo}`}
+                >
+                  <Pencil1Icon />
+                </IconButton>
+              }
+            />
+            <DeleteTaskDialog task={task} />
+          </Flex>
         </Flex>
         {task.descricao && (
           <Text as="p" size="2" color="gray">
