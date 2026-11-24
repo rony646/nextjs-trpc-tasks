@@ -1,5 +1,6 @@
 import { Button, Flex, Heading } from "@radix-ui/themes";
 
+import { TaskFormDialog } from "@/components/task-form-dialog";
 import { TaskList } from "@/components/task-list";
 import { getQueryClient, HydrateClient, trpc } from "@/trpc/server";
 
@@ -14,7 +15,7 @@ export default async function HomePage() {
         <Heading as="h1" size="7">
           Tarefas
         </Heading>
-        <Button size="3">Nova tarefa</Button>
+        <TaskFormDialog trigger={<Button size="3">Nova tarefa</Button>} />
       </Flex>
       <HydrateClient>
         <TaskList />
