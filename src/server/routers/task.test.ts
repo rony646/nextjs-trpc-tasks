@@ -50,15 +50,18 @@ describe("task.create", () => {
     expect(task.titulo).toBe("Nova tarefa");
   });
 
-  it("rejects a blank title with BAD_REQUEST and field errors", async () => {
-    const error = await catchTRPCError(caller.task.create({ titulo: "   " }));
+  it.each(["", "   "])(
+    "rejects the title %j with BAD_REQUEST and field errors",
+    async (titulo) => {
+      const error = await catchTRPCError(caller.task.create({ titulo }));
 
-    expect(error.code).toBe("BAD_REQUEST");
-    expect(error.cause).toBeInstanceOf(ZodError);
-    expect(z.flattenError(error.cause as ZodError).fieldErrors).toEqual({
-      titulo: ["O título é obrigatório"],
-    });
-  });
+      expect(error.code).toBe("BAD_REQUEST");
+      expect(error.cause).toBeInstanceOf(ZodError);
+      expect(z.flattenError(error.cause as ZodError).fieldErrors).toEqual({
+        titulo: ["O título é obrigatório"],
+      });
+    },
+  );
 });
 
 describe("task.update", () => {
