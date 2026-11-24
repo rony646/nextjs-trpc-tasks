@@ -26,8 +26,8 @@ const descricaoSchema = z
     DESCRICAO_MAX_LENGTH,
     `A descrição deve ter no máximo ${DESCRICAO_MAX_LENGTH} caracteres`,
   )
-  .optional()
-  .transform((descricao) => descricao || undefined);
+  .transform((descricao) => descricao || undefined)
+  .optional();
 
 export const taskSchema = z.object({
   id: idSchema,
