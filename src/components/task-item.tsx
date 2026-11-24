@@ -14,13 +14,17 @@ const dateFormatter = new Intl.DateTimeFormat("pt-BR", {
   timeZone: DISPLAY_TIME_ZONE,
 });
 
+// Radix paints the card background on ::before from this variable, so the transition goes there.
+const CARD_HOVER_CLASS_NAME =
+  "before:transition-colors before:duration-200 before:ease-in-out hover:[--card-background-color:var(--gray-2)]";
+
 type TaskItemProps = {
   task: Task;
 };
 
 export function TaskItem({ task }: TaskItemProps) {
   return (
-    <Card size="2">
+    <Card size="2" className={CARD_HOVER_CLASS_NAME}>
       <Flex direction="column" gap="1">
         <Flex justify="between" align="start" gap="3">
           <Heading as="h2" size="3">
