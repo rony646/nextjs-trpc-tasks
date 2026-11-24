@@ -11,9 +11,16 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.108.4",
+    "@trpc/client": "^11.31.2",
+    "@trpc/server": "^11.31.2",
+    "@trpc/tanstack-react-query": "^11.31.2",
     "next": "15.5.29",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "server-only": "^0.0.1",
+    "superjson": "^2.2.7",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

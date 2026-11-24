@@ -45,7 +45,7 @@ Keep TanStack Query usage minimal and easy to read:
 - All task queries and mutations live in one file, `src/trpc/tasks.ts`, one small hook per operation.
 - Use the tRPC hooks and their generated query keys. Never write query keys by hand.
 - After a mutation, refresh data only with `invalidate` on the task list.
-- No optimistic updates, no manual cache edits, no custom query client options beyond the defaults.
+- No optimistic updates, no manual cache edits, no custom query client options beyond the defaults. The only exception is `staleTime`, so the client does not refetch data the server just prefetched.
 - All data is fictional. Never commit personal data, secrets, tokens or `.env` files.
 
 ## Lint, format and tests
