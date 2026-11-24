@@ -78,6 +78,31 @@ const SEED_TASKS: Pick<Task, "titulo" | "descricao">[] = [
     descricao: "Comparar antes e depois das otimizações.",
   },
   { titulo: "Ler artigos sobre acessibilidade" },
+  {
+    titulo: "Revisar contratos de fornecedores",
+    descricao: "Verificar prazos de renovação e reajustes.",
+  },
+  { titulo: "Atualizar o README do projeto" },
+  {
+    titulo: "Configurar alertas de monitoramento",
+    descricao: "Avisar a equipe quando a taxa de erros subir.",
+  },
+  { titulo: "Organizar a pasta de downloads" },
+  {
+    titulo: "Preparar o onboarding do novo colega",
+    descricao: "Separar acessos, documentos e um primeiro desafio.",
+  },
+  { titulo: "Remover código não utilizado" },
+  {
+    titulo: "Definir metas do próximo trimestre",
+    descricao: "Alinhar as prioridades com a liderança.",
+  },
+  { titulo: "Testar o site em dispositivos móveis" },
+  {
+    titulo: "Revisar o fluxo de recuperação de senha",
+    descricao: "Garantir que o link expira no prazo correto.",
+  },
+  { titulo: "Atualizar a foto do perfil da equipe" },
 ];
 
 export function createSeedTasks(now = new Date()): Task[] {
