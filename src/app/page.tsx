@@ -3,7 +3,7 @@ import { Button, Flex, Heading } from "@radix-ui/themes";
 import { TaskFormDialog } from "@/components/task-form-dialog";
 import { TaskList } from "@/components/task-list";
 import { getQueryClient, HydrateClient, trpc } from "@/trpc/server";
-import { taskListOptions } from "@/trpc/tasks";
+import { taskListOptions } from "@/trpc/task-list-options";
 
 // The tasks change at runtime, so the page must render on every request, never at build time.
 export const dynamic = "force-dynamic";
