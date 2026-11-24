@@ -36,7 +36,8 @@ export function useUpdateTask() {
 export function useDeleteTask() {
   const trpc = useTRPC();
   const invalidateTaskList = useInvalidateTaskList();
+  // Refresh on error too: a NOT_FOUND means the task is already gone and should leave the list.
   return useMutation(
-    trpc.task.delete.mutationOptions({ onSuccess: invalidateTaskList }),
+    trpc.task.delete.mutationOptions({ onSettled: invalidateTaskList }),
   );
 }
