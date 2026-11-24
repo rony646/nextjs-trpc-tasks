@@ -30,7 +30,9 @@ function newestFirst(a: Task, b: Task) {
   );
 }
 
+// The only code that touches the store, so moving to a database would only change this file.
 export const taskRepository = {
+  // The cursor is the id of the last task already loaded: unlike an offset, it does not skip or repeat tasks when new ones are created.
   list({ cursor, limit }: ListTasksInput): TaskPage {
     const tasks = [...getStore().values()].sort(newestFirst);
     const cursorIndex = cursor
