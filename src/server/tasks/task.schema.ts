@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const TITULO_MAX_LENGTH = 100;
 export const DESCRICAO_MAX_LENGTH = 500;
-const LIST_DEFAULT_LIMIT = 10;
+export const TASK_PAGE_SIZE = 10;
 const LIST_MAX_LIMIT = 50;
 const LIMIT_RANGE_MESSAGE = `O limite deve ser entre 1 e ${LIST_MAX_LIMIT}`;
 const TITULO_REQUIRED_MESSAGE = "O título é obrigatório";
@@ -53,7 +53,7 @@ export const listTasksInput = z.object({
     .int()
     .min(1, LIMIT_RANGE_MESSAGE)
     .max(LIST_MAX_LIMIT, LIMIT_RANGE_MESSAGE)
-    .default(LIST_DEFAULT_LIMIT),
+    .default(TASK_PAGE_SIZE),
 });
 
 export type Task = z.infer<typeof taskSchema>;
